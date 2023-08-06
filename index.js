@@ -5,7 +5,7 @@ var app = express();
 const cors = require('cors');
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL_DEV
+  origin: process.env.FRONTEND_URL
 }));
 app.use(bodyParser.json());
 const stripe = require('./utils/stripeModule');
