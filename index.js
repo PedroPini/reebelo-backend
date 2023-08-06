@@ -1,9 +1,8 @@
-require('dotenv').config()
 var express = require('express');
 const bodyParser= require('body-parser');
 var app = express();
 const cors = require('cors');
-
+require('dotenv').config()
 app.use(cors({
   origin: process.env.FRONTEND_URL
 }));
