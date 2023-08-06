@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Stripe = require('stripe');
-const stripe = Stripe('sk_test_51NbJxfFiq7mJBxF3bctASH4BYq4tb4muca8EgT2oexhpoPvzewKzdB2ZagLeFhAOzvStzUAovvbTBE2VocTK5ucr00RXM8Lvcr');
+const stripe = Stripe(process.env.STRIPE_KEY);
 module.exports = stripe;

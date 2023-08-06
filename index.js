@@ -1,9 +1,11 @@
+require('dotenv').config()
 var express = require('express');
 const bodyParser= require('body-parser');
 var app = express();
 const cors = require('cors');
+
 app.use(cors({
-  origin: 'http://localhost:3001'
+  origin: process.env.FRONTEND_URL_DEV
 }));
 app.use(bodyParser.json());
 const stripe = require('./utils/stripeModule');
@@ -12,7 +14,8 @@ const specs = require('./openapi');
 const orderRoute = require('./routes/order');
 const productRoute = require('./routes/product');
 const shippingRoute = require('./routes/shipping');
-
+// Import the Swagger JSDoc file
+require('./swagger.js');
 app.use('/order', orderRoute);
 app.use('/product', productRoute);
 app.use('/shipping', shippingRoute);
