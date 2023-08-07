@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const stripe = require('../utils/stripeModule');
-
+const INITIAL_ORDER_STATUS = 'processing'
 
 router.post('/create', async (req, res) => {
     try {
@@ -16,7 +16,8 @@ router.post('/create', async (req, res) => {
       const Invoice = await stripe.invoices.create({
         customer: customer_id,
         metadata: {
-            'invoiceItem': invoiceItem.id
+            'invoiceItem': invoiceItem.id,
+            'status': INITIAL_ORDER_STATUS
         }         
       });
       
@@ -37,12 +38,9 @@ router.post('/create', async (req, res) => {
   router.put('/update', async (req, res) => {
     try {
       const { invoice_id, status } = req.body;
-      //finalizeInvoice finalize, pay, send
+      //I could have used finalizeInvoice finalize, pay, send from STRIPE
       // Create a new order using Stripe API
-      const paymentLink = await stripe.invoices.update(""+invoice_id+"",{
-        status: status
-        
-      });
+      const paymentLink = await stripe.invoices.update(""+invoice_id+"",{metadata: {'status': status}});
   
       // Respond with the order confirmation
       res.status(200).json({ message: 'Order updated successfully!' });
