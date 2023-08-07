@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
         currency: 'aud', 
       });
   
-      res.json({ message: 'Product created/updated successfully!' });
+      res.json({ message: 'Product created successfully!' });
     } catch (error) {
       console.log(error)
       res.status(500).json({ error: 'Something went wrong.' });
@@ -101,7 +101,7 @@ router.put('/price', async (req, res) => {
       currency: 'aud', 
     });
 
-    res.json({ message: 'Product updated successfully!' });
+    res.json({ message: 'Product Price updated successfully!' });
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Something went wrong.' });

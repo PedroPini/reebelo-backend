@@ -1,12 +1,6 @@
-
-
 const express = require('express');
 const router = express.Router();
 const stripe = require('../utils/stripeModule');
-
-
-
-  
 
 
 router.post('/create', async (req, res) => {
@@ -18,15 +12,13 @@ router.post('/create', async (req, res) => {
         price: price_id,
         quantity: quantity
       });
-      // Create a new order using Stripe API
+      
       const Invoice = await stripe.invoices.create({
         customer: customer_id,
         metadata: {
             'invoiceItem': invoiceItem.id
-        }
-                
+        }         
       });
-      
       
       const product = await stripe.products.retrieve(
         product_id
@@ -35,7 +27,7 @@ router.post('/create', async (req, res) => {
       );
   
       // Respond with the order confirmation
-      res.status(200).json({ clientSecret: product_update.client_secret });
+      res.status(200).json({ message: 'Order created successfully!' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred while processing the order.' });
@@ -53,10 +45,10 @@ router.post('/create', async (req, res) => {
       });
   
       // Respond with the order confirmation
-      res.status(200).json({ clientSecret: paymentIntent.client_secret });
+      res.status(200).json({ message: 'Order updated successfully!' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'An error occurred while processing the order.' });
+      res.status(500).json({ error: 'An error occurred while updating the order.' });
     }
   });
 
@@ -73,7 +65,7 @@ router.post('/create', async (req, res) => {
       res.status(200).json({ data:invoices, items:invoiceItems });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'An error occurred while processing the order.' });
+      res.status(500).json({ error: 'An error occurred while fetching all the orders.' });
     }
   });
 

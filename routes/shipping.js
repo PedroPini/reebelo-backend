@@ -48,7 +48,7 @@ try {
     });
 
     // Respond with the order confirmation
-    res.status(200).json({ clientSecret: invoice.client_secret });
+    res.status(200).json({ message: 'Shipping created successfully!' });
 } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while processing the order.' });
