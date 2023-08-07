@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config()
 var corsOptions = {
   // origin: 'pybytes.pycom.io',
-  origin: process.env.FRONTEND_URL,
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -17,7 +17,7 @@ const orderRoute = require('./routes/order');
 const productRoute = require('./routes/product');
 const shippingRoute = require('./routes/shipping');
 // Import the Swagger JSDoc file
-require('./swagger.js');
+
 app.use('/order', orderRoute);
 app.use('/product', productRoute);
 app.use('/shipping', shippingRoute);
@@ -36,7 +36,7 @@ app.post('/createUser', async (req, res) => {
 
 
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Example app listening on port 3000!');
 });
 

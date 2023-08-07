@@ -1,5 +1,5 @@
 const swaggerJsdoc = require('swagger-jsdoc');
-
+require('dotenv').config()
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -10,11 +10,11 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', // Update with your server URL
+        url: process.env.FRONTEND_URL || 'http://localhost:3000',
       },
     ],
   },
-  apis: ['./docs/*.js'], // Path to your route files
+  apis: ['./docs/*.js'], 
 };
 
 const specs = swaggerJsdoc(options);
