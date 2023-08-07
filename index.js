@@ -3,9 +3,12 @@ const bodyParser= require('body-parser');
 var app = express();
 const cors = require('cors');
 require('dotenv').config()
-app.use(cors({
-  origin: process.env.FRONTEND_URL
-}));
+var corsOptions = {
+  // origin: 'pybytes.pycom.io',
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 const stripe = require('./utils/stripeModule');
 const swaggerUi = require('swagger-ui-express');
