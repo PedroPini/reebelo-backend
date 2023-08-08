@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config()
 let cache = require('apicache').middleware
 var corsOptions = {
-  origin: [process.env.FRONTEND_URL || 'http://localhost:3000', process.env.MY_MACHINE],
+  origin: [process.env.FRONTEND_URL || 'http://localhost:3001', process.env.MY_MACHINE],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));

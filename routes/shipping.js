@@ -31,7 +31,6 @@ router.post('/create', async (req, res) => {
 try {
     const { invoice_id } = req.body;
 
-
     const shipping = await stripe.shippingRates.create({
     display_name: SHIPPING_COMPANY,
     type: SHIPPING_TYPE,
@@ -39,8 +38,6 @@ try {
     delivery_estimate: SHIPPING_ESTIMATE_DAYS,
     metadata: {city: SHIPPING_CITY, state: SHIPPING_STATE, zip:SHIPPING_ZIP}
     });
-    
-    
     
     const invoice = await stripe.invoices.update(""+invoice_id+"",{
     metadata: {id:shipping.id, active: shipping.active, delivery_estimate: DateEstimate(shipping.delivery_estimate.maximum.value), courier: shipping.display_name, amount:shipping.fixed_amount.amount, city:shipping.metadata.city, state:shipping.metadata.state, zip:shipping.metadata.zip}
@@ -51,7 +48,7 @@ try {
     res.status(200).json({ message: 'Shipping created successfully!' });
 } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred while processing the order.' });
+    res.status(500).json({ error: 'An error occurred while creating the shipping.' });
 }
 });  
 
