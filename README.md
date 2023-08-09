@@ -12,7 +12,7 @@ This project is built using Node.js, Express.js, and other related technologies.
    
 ### 2. Install required NPM packages: 
    
-```npm install https://github.com/PedroPini/reebelo-backend.git```
+```npm install```
 
 ### 3. Create a .env file: 
    Some parameters are
